@@ -350,10 +350,166 @@ padding:20px;
     visibility:visible;
     transform:translateY(0);
 }
+/* MENU HAMBURGUER */
+
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:30px;
+    cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    nav{
+        padding:15px 20px;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    #menu{
+        position:absolute;
+        top:75px;
+        left:0;
+
+        width:100%;
+
+        display:none;
+        flex-direction:column;
+
+        background:rgba(8,20,35,.98);
+        backdrop-filter:blur(25px);
+
+        border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    #menu.active{
+        display:flex;
+    }
+
+    #menu li{
+        width:100%;
+    }
+
+    #menu li a{
+        display:block;
+        width:100%;
+        padding:18px 25px;
+        border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    .dropdown-menu{
+
+        position:static;
+
+        width:100%;
+
+        opacity:1;
+        visibility:visible;
+
+        transform:none;
+
+        display:none;
+
+        background:rgba(255,255,255,.03);
+
+        border:none;
+        border-radius:0;
+
+        padding:0;
+    }
+
+    .dropdown.open .dropdown-menu{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .dropdown-menu li a{
+        padding-left:45px;
+        font-size:14px;
+    }
+
+    .container{
+        padding:100px 20px 50px;
+    }
+
+    .area-title{
+        font-size:32px;
+        margin-bottom:30px;
+    }
+
+    .category-title{
+        font-size:24px;
+    }
+
+    .lesson-grid{
+        grid-template-columns:1fr;
+    }
+
+    .lesson-card{
+        padding:20px;
+    }
+
+    .lesson-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .tag{
+        align-self:flex-start;
+    }
+
+    .lesson-card h3{
+        font-size:18px;
+    }
+
+    .lesson-card p{
+        font-size:14px;
+        line-height:1.7;
+    }
+
+    footer{
+        padding:25px 15px;
+        font-size:13px;
+    }
+}
 
 </style>
 </head>
+<script>
 
+function toggleMenu(){
+
+    document
+        .getElementById("menu")
+        .classList
+        .toggle("active");
+
+}
+
+function toggleDropdown(event){
+
+    if(window.innerWidth <= 900){
+
+        event.preventDefault();
+
+        event.target
+            .closest(".dropdown")
+            .classList
+            .toggle("open");
+
+    }
+
+}
+
+</script>
 <body>
 
 <div class="background"></div>
@@ -365,7 +521,11 @@ padding:20px;
         LIÇÕES <span>APRENDIDAS</span>
     </div>
 
-    <ul>
+    <button class="menu-toggle" onclick="toggleMenu()">
+        ☰
+    </button>
+
+    <ul id="menu">
 
         <li>
             <a href="index.html">Início</a>
@@ -373,41 +533,17 @@ padding:20px;
 
         <li class="dropdown">
 
-            <a href="diretorio.html" class="active">
+            <a href="#" class="active" onclick="toggleDropdown(event)">
                 Diretório ▾
             </a>
 
             <ul class="dropdown-menu">
 
-                <li>
-                    <a href="planejamento.html">
-                        Planejamento
-                    </a>
-                </li>
-
-                <li>
-                    <a href="index.html">
-                        Engenharia
-                    </a>
-                </li>
-
-                <li>
-                    <a href="index.html">
-                        Suprimentos
-                    </a>
-                </li>
-
-                <li>
-                    <a href="index.html">
-                        Construção
-                    </a>
-                </li>
-
-                <li>
-                    <a href="index.html">
-                        Comissionamento
-                    </a>
-                </li>
+                <li><a href="planejamento.html">Planejamento</a></li>
+                <li><a href="index.html">Engenharia</a></li>
+                <li><a href="index.html">Suprimentos</a></li>
+                <li><a href="index.html">Construção</a></li>
+                <li><a href="index.html">Comissionamento</a></li>
 
             </ul>
 
