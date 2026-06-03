@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lições Aprendidas - Manaus I</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+font-family:'Inter',sans-serif;
+background:#07131f;
+color:#fff;
+overflow-x:hidden;
+}
+
+.background{
+position:fixed;
+inset:0;
+z-index:-2;
+background:
+radial-gradient(circle at top left,#0f5b8d 0%,transparent 30%),
+radial-gradient(circle at bottom right,#0b3154 0%,transparent 30%),
+linear-gradient(135deg,#06111c,#07131f,#081a29);
+}
+
+.grid{
+position:fixed;
+inset:0;
+z-index:-1;
+background-image:
+linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+background-size:40px 40px;
+}
+
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:18px 60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(8,20,35,.75);
+backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(255,255,255,.08);
+z-index:1000;
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+}
+
+.logo span{color:#4ec3ff}
+
+nav ul{
+display:flex;
+gap:30px;
+list-style:none;
+}
+
+nav a{
+color:#fff;
+text-decoration:none;
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+padding:120px 8%;
+}
+
+.hero-content{
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:50px;
+width:100%;
+align-items:center;
+}
+
+.hero-text h1{
+font-size:60px;
+line-height:1.1;
+}
+
+.hero-text h1 span{
+color:#4ec3ff;
+}
+
+.hero-text p{
+margin-top:20px;
+color:#b6c7d8;
+line-height:1.8;
+}
+
+.buttons{
+display:flex;
+gap:15px;
+margin-top:30px;
+}
+
+.btn{
+padding:15px 25px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-weight:600;
+}
+
+.btn-primary{
+background:linear-gradient(135deg,#1d8bd1,#4ec3ff);
+color:#fff;
+}
+
+.btn-secondary{
+background:rgba(255,255,255,.08);
+color:#fff;
+border:1px solid rgba(255,255,255,.1);
+}
+
+.system-panel{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+border-radius:28px;
+padding:30px;
+backdrop-filter:blur(20px);
+}
+
+.panel-header{
+display:flex;
+justify-content:space-between;
+margin-bottom:25px;
+}
+
+.status{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.dot{
+width:12px;
+height:12px;
+border-radius:50%;
+background:#00ff95;
+box-shadow:0 0 15px #00ff95;
+}
+
+.kpi-grid,.summary-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.kpi-card,.summary-card{
+background:rgba(255,255,255,.04);
+padding:20px;
+border-radius:18px;
+text-align:center;
+}
+
+.kpi-card h3{
+font-size:42px;
+color:#4ec3ff;
+margin-top:10px;
+}
+.kpi-card h3{
+font-size:42px;
+color:#4ec3ff;
+margin-top:10px;
+}
+
+.kpi-card span,.summary-card small{
+color:#9fb3c8;
+}
+
+.bar-area{margin-top:30px}
+
+.bar-item{margin-bottom:22px}
+
+.bar-label{
+display:flex;
+justify-content:space-between;
+margin-bottom:8px;
+}
+
+.bar-bg{
+height:14px;
+background:rgba(255,255,255,.08);
+border-radius:30px;
+overflow:hidden;
+}
+
+.bar-fill{
+height:100%;
+border-radius:30px;
+}
+
+.blue{background:linear-gradient(90deg,#4ec3ff,#2196f3)}
+.green{background:linear-gradient(90deg,#00ff95,#00c96b)}
+.red{background:linear-gradient(90deg,#ff6363,#ff3b3b)}
+
+.summary-grid{margin-top:30px}
+
+.summary-card h3{
+font-size:28px;
+margin-top:8px;
+}
+
+section{
+padding:120px 8%;
+}
+
+.section-title{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.section-title span{
+color:#4ec3ff;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,.05);
+padding:30px;
+border-radius:22px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.card p{
+margin-top:12px;
+color:#b6c7d8;
+line-height:1.7;
+}
+
+.timeline{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+.timeline-item{
+display:flex;
+gap:20px;
+}
+
+.timeline-dot{
+width:18px;
+height:18px;
+background:#4ec3ff;
+border-radius:50%;
+margin-top:6px;
+box-shadow:0 0 15px #4ec3ff;
+}
+
+.timeline-content{
+flex:1;
+background:rgba(255,255,255,.04);
+padding:25px;
+border-radius:18px;
+}
+
+.timeline-content p{
+margin-top:10px;
+color:#b6c7d8;
+}
+
+footer{
+padding:40px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.05);
+color:#8aa0b4;
+}
+
+@media(max-width:980px){
+.hero-content{grid-template-columns:1fr}
+.hero-text h1{font-size:42px}
+nav ul{display:none}
+.kpi-grid,.summary-grid{grid-template-columns:1fr}
+}
+
+/* CÓD NAVBAR FICAR COMO LISTA*/
+
+/* DROPDOWN */
+
+.dropdown{
+    position:relative;
+}
+
+.dropdown-menu{
+    position:absolute;
+    top:120%;
+    left:0;
+
+    width:220px;
+
+    background:rgba(8,20,35,.98);
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+
+    padding:10px;
+
+    list-style:none;
+
+    display:flex;
+    flex-direction:column; /* força vertical */
+
+    gap:5px;
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:translateY(10px);
+
+    transition:.3s;
+
+    z-index:9999;
+}
+
+.dropdown-menu li{
+    width:100%;
+}
+
+.dropdown-menu li a{
+    display:block;
+    width:100%;
+
+    padding:12px 15px;
+
+    text-decoration:none;
+
+    color:white;
+
+    border-radius:10px;
+
+    transition:.3s;
+}
+
+.dropdown-menu li a:hover{
+    background:rgba(78,195,255,.15);
+    color:#4ec3ff;
+}
+
+.dropdown:hover .dropdown-menu{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="grid"></div>
+
+<nav>
+
+    <div class="logo">
+        LIÇÕES <span>APRENDIDAS</span>
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="index.html">Início</a>
+        </li>
+
+        <li class="dropdown">
+
+            <a href="diretorio.html" class="active">
+                Diretório ▾
+            </a>
+
+            <ul class="dropdown-menu">
+
+                <li>
+                    <a href="planejamento.html">
+                        Planejamento
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        Engenharia
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        Suprimentos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        Construção
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        Comissionamento
+                    </a>
+                </li>
+
+            </ul>
+
+        </li>
+
+        <li>
+            <a href="dados.html">Dados</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+<section class="hero">
+<div class="hero-content">
+
+<div class="hero-text">
+<h1>Aprender com o passado <span>é garantir projetos melhores no futuro.</span></h1>
+
+<p>
+A proposta visa contribuir para o registro estruturado das Lições Aprendidas do Projeto Manaus I,
+garantindo que o conhecimento gerado durante sua execução seja preservado, compartilhado e utilizado
+como base para aprimorar iniciativas futuras.
+</p>
+
+<div class="buttons">
+
+<a href="dados.html" class="btn btn-secondary">
+    Dados e Gráficos
+</a>
+</div>
+</div>
+
+<div class="system-panel">
+
+<div class="panel-header">
+
+ <h2>INDICADORES</h2>
+
+</div>
+
+<div class="kpi-grid">
+<div class="kpi-card"><span>Bom / Acerto</span><h3>28</h3></div>
+<div class="kpi-card"><span>Necessária Correção</span><h3>21</h3></div>
+<div class="kpi-card"><span>Pode Melhorar</span><h3>35</h3></div>
+</div>
+
+<div class="bar-area">
+
+<div class="bar-item">
+<div class="bar-label"><span>Pode Melhorar</span><strong>35</strong></div>
+<div class="bar-bg"><div class="bar-fill blue" style="width:100%"></div></div>
+</div>
+
+<div class="bar-item">
+<div class="bar-label"><span>Bom / Acerto</span><strong>28</strong></div>
+<div class="bar-bg"><div class="bar-fill green" style="width:76%"></div></div>
+</div>
+
+<div class="bar-item">
+<div class="bar-label"><span>Necessária Correção</span><strong>21</strong></div>
+<div class="bar-bg"><div class="bar-fill red" style="width:61%"></div></div>
+</div>
+
+</div>
+
+<div class="summary-grid">
+<div class="summary-card"><small>Total </small><h3>84</h3></div>
+<div class="summary-card"><small>Triagem</small><h3>0%</h3></div>
+<div class="summary-card"><small>Book</small><h3>0%</h3></div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section>
+<h2 class="section-title">Resultados <span>Esperados</span></h2>
+
+<div class="cards">
+<div class="card">
+<h3>Centralização</h3>
+<p>Centralização e padronização dos registros de Lições Aprendidas.</p>
+</div>
+
+<div class="card">
+<h3>Impacto em Projetos</h3>
+<p>Aumento da eficiência na tomada de decisões em projetos futuros.</p>
+</div>
+
+<div class="card">
+<h3>Informação Compartilhada</h3>
+<p>Facilitação do compartilhamento de boas práticas entre equipes.</p>
+</div>
+
+<div class="card">
+<h3>Menos Retrabalho</h3>
+<p>Redução de retrabalhos e recorrência de problemas já identificados.</p>
+</div>
+</div>
+</section>
+
+<section>
+<h2 class="section-title">Etapas do <span>Processo</span></h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<h3>Envio das Lições Aprendidas</h3>
+<p>Todos os envolvidos no projeto podem cadastrar suas Lições Aprendidas.</p>
+</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<h3>Registro no Sistema</h3>
+<p>Após a triagem inicial, as informações são direcionadas ao banco de dados e avaliadores.</p>
+</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<h3>Aprovação</h3>
+<p>Os avaliadores analisam e aprovam ou solicitam ajustes na Lição Aprendida.</p>
+</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<h3>Construção do Book</h3>
+<p>Após a aprovação, a Lição é incorporada ao Diretório oficial.</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<footer>
+Lições Aprendidas - Desenvolvido por Jordan Everton
+</footer>
+
+</body>
+</html>
