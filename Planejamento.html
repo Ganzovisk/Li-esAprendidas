@@ -643,7 +643,28 @@ function abrirComentarios(){
 
 }
 
+    function toggleMenu(){
+    document
+        .getElementById("menu")
+        .classList
+        .toggle("active");
+}
+
+function toggleDropdown(event){
+
+    if(window.innerWidth <= 900){
+
+        event.preventDefault();
+
+        event.target
+            .closest(".dropdown")
+            .classList
+            .toggle("open");
+    }
+}
+
 </script>
+    
 
 <div id="modalComentario" class="modal">
 
